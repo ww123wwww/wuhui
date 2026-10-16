@@ -1,0 +1,165 @@
+<!-- 首页 - 发现页 -->
+<view class="page">
+  <!-- 顶部搜索栏 -->
+  <view class="header" style="padding-top: {{statusBarHeight + 12}}px; position: sticky; left: NaNrpx; top: 0rpx">
+    <view class="search-bar" bindtap="onSearch">
+      <image class="search-icon" src="/static/app_tabbar/搜索.png" mode="aspectFit"></image>
+      <text class="search-placeholder">寻找你的下一站</text>
+      <view class="search-btn">
+        <text>搜索</text>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content" enhanced show-scrollbar="{{false}}">
+    <!-- Banner轮播 -->
+    <view class="banner-section">
+      <swiper class="banner-swiper" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ffd700" autoplay circular>
+        <swiper-item>
+          <view class="banner-slide">
+            <image class="banner-img" src="/static/app_tabbar/banner/banner.jpg" mode="widthFix"></image>
+            <view class="banner-overlay"></view>
+            <view class="banner-text">
+              <text class="banner-title">自由旅行家</text>
+              <text class="banner-subtitle">每一步，都走在热爱里</text>
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item>
+          <view class="banner-slide">
+            <image class="banner-img" src="/static/app_tabbar/banner/banner2.png" mode="widthFix"></image>
+            <view class="banner-overlay"></view>
+            <view class="banner-text">
+              <text class="banner-title">发现世界之美</text>
+              <text class="banner-subtitle">探索未知的精彩旅程</text>
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item>
+          <view class="banner-slide">
+            <image class="banner-img" src="/static/app_tabbar/banner/banner.jpg" mode="widthFix"></image>
+            <view class="banner-overlay"></view>
+            <view class="banner-text">
+              <text class="banner-title">出发鸭</text>
+              <text class="banner-subtitle">和志同道合的人一起旅行</text>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <!-- 金刚区导航 -->
+    <view class="kingkong-section">
+      <view class="kingkong-grid">
+        <view class="kingkong-item" bindtap="navigateTo" data-url="/pages/find-guides/find-guides">
+          <view class="kingkong-icon">
+            <image class="kingkong-icon-img" src="/static/app_tabbar/icon_index/find-guides.png" mode="aspectFit"></image>
+          </view>
+          <text class="kingkong-label">找攻略</text>
+        </view>
+        <view class="kingkong-item" bindtap="navigateTo" data-url="/pages/notes/notes">
+          <view class="kingkong-icon">
+            <image class="kingkong-icon-img" src="/static/app_tabbar/icon_index/travel-notes.png" mode="aspectFit"></image>
+          </view>
+          <text class="kingkong-label">看游记</text>
+        </view>
+        <view class="kingkong-item" bindtap="navigateTo" data-url="/pages/roadtrip/roadtrip">
+          <view class="kingkong-icon kingkong-hot">
+            <image class="kingkong-icon-img" src="/static/app_tabbar/icon_index/roadtrip.png" mode="aspectFit"></image>
+            <view class="kingkong-badge"></view>
+          </view>
+          <text class="kingkong-label">自驾游</text>
+        </view>
+        <view class="kingkong-item" bindtap="navigateTo" data-url="/pages/find-buddy/find-buddy">
+          <view class="kingkong-icon">
+            <image class="kingkong-icon-img" src="/static/app_tabbar/icon_index/find-buddy.png" mode="aspectFit"></image>
+          </view>
+          <text class="kingkong-label">找搭子</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 今日推荐 -->
+    <view class="section-header">
+      <text class="section-title">今日推荐</text>
+    </view>
+    <scroll-view class="recommend-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="recommend-list">
+        <view class="recommend-card" wx:for="{{recommends}}" wx:key="id">
+          <image wx:if="{{item.image}}" class="recommend-img" src="{{item.image}}" mode="aspectFill"></image>
+          <view wx:else class="recommend-img recommend-img-placeholder">
+            <text class="recommend-img-text">📷</text>
+          </view>
+          <view class="recommend-overlay"></view>
+          <view class="recommend-badge" wx:if="{{item.badge}}">
+            <text class="recommend-badge-date">{{item.badgeDate}}</text>
+            <text class="recommend-badge-text">{{item.badgeText}}</text>
+          </view>
+          <view class="recommend-info">
+            <text class="recommend-title">{{item.title}}</text>
+            <view class="recommend-author">
+              <image class="recommend-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+              <text class="recommend-author-name">{{item.author}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 用户游记瀑布流 -->
+    <view class="section-header">
+      <text class="section-title">用户游记</text>
+    </view>
+    <view class="waterfall">
+      <view class="waterfall-col">
+        <block wx:for="{{leftPosts}}" wx:key="id">
+          <view class="waterfall-card" bindtap="viewPost" data-id="{{item.id}}">
+            <view class="waterfall-img-wrap">
+              <image wx:if="{{item.image}}" class="waterfall-img" src="{{item.image}}" mode="widthFix" style="height: {{item.imgHeight}}rpx;"></image>
+            </view>
+            <view class="waterfall-body">
+              <text class="waterfall-title">{{item.title}}</text>
+              <view class="waterfall-footer">
+                <view class="waterfall-user">
+                  <image class="waterfall-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+                  <text class="waterfall-username">{{item.username}}</text>
+                </view>
+                <view class="waterfall-likes" bindtap="onLike" data-id="{{item.id}}" data-liked="{{item.isLiked}}" data-likes="{{item.likes}}">
+                  <image class="waterfall-like-icon" src="{{item.isLiked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+                  <text class="waterfall-like-count">{{item.likes}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="waterfall-col">
+        <block wx:for="{{rightPosts}}" wx:key="id">
+          <view class="waterfall-card" bindtap="viewPost" data-id="{{item.id}}">
+            <view class="waterfall-img-wrap">
+              <image wx:if="{{item.image}}" class="waterfall-img" src="{{item.image}}" mode="widthFix" style="height: {{item.imgHeight}}rpx;"></image>
+            </view>
+            <view class="waterfall-body">
+              <text class="waterfall-title">{{item.title}}</text>
+              <view class="waterfall-footer">
+                <view class="waterfall-user">
+                  <image class="waterfall-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+                  <text class="waterfall-username">{{item.username}}</text>
+                </view>
+                <view class="waterfall-likes" bindtap="onLike" data-id="{{item.id}}" data-liked="{{item.isLiked}}" data-likes="{{item.likes}}">
+                  <image class="waterfall-like-icon" src="{{item.isLiked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+                  <text class="waterfall-like-count">{{item.likes}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view style="height: 160rpx;"></view>
+  </scroll-view>
+
+  <!-- 底部导航 -->
+  <tab-bar current="{{0}}"></tab-bar>
+</view>

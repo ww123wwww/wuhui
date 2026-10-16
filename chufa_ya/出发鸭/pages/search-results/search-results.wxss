@@ -1,0 +1,578 @@
+.page {
+  min-height: 100vh;
+  background: #f9f9fb;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f9f9fb;
+  padding: 0 32rpx 12rpx;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.nav-back {
+  padding: 4rpx;
+}
+
+.nav-back:active {
+  transform: scale(0.95);
+}
+
+.back-icon {
+  font-size: 44rpx;
+  color: #705d00;
+  font-weight: 700;
+}
+
+.search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #eeeef0;
+  border-radius: 9999rpx;
+  padding: 8rpx 16rpx;
+  height: 80rpx;
+}
+
+.search-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  background: transparent;
+}
+
+.search-clear {
+  background: #ffd700;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #705e00;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.search-btn {
+  background: #ffd700;
+  color: #705e00;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 8rpx 28rpx;
+  border-radius: 9999rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 分类标签栏 */
+.tab-bar {
+  position: sticky;
+  top: 100rpx;
+  z-index: 90;
+  background: rgba(249, 249, 251, 0.8);
+  backdrop-filter: blur(20rpx);
+  border-bottom: 2rpx solid rgba(226, 226, 228, 0.5);
+  padding: 0 32rpx;
+}
+
+.tab-list {
+  display: flex;
+  align-items: center;
+  gap: 64rpx;
+  height: 96rpx;
+}
+
+.tab-item {
+  position: relative;
+  font-size: 28rpx;
+  color: #4d4732;
+  padding-bottom: 16rpx;
+}
+
+.tab-item.active {
+  color: #1a1c1d;
+  font-weight: 700;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 8rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 8rpx;
+  background: #ffd700;
+  border-radius: 4rpx;
+}
+
+/* 内容区域 */
+.page-content {
+  height: calc(100vh - 200rpx);
+  padding: 24rpx 32rpx;
+}
+
+/* 搜索历史 */
+.history-section {
+  margin-bottom: 32rpx;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.history-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+}
+
+.history-clear {
+  font-size: 24rpx;
+  color: #5f5e5e;
+}
+
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.history-tag {
+  background: #eeeef0;
+  padding: 12rpx 28rpx;
+  border-radius: 9999rpx;
+  font-size: 26rpx;
+  color: #1a1c1d;
+}
+
+.history-tag:active {
+  background: #e0e0e2;
+}
+
+/* 统一板块 */
+.section {
+  margin-bottom: 48rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+}
+
+/* 攻略卡片 */
+.guide-card {
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.guide-card:active {
+  transform: scale(0.98);
+}
+
+.guide-img-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.guide-img {
+  width: 100%;
+  height: 100%;
+}
+
+.guide-img-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-img-text {
+  font-size: 64rpx;
+}
+
+.guide-body {
+  padding: 24rpx;
+}
+
+.guide-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+  display: block;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.guide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guide-author {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.guide-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+
+.guide-author-name {
+  font-size: 24rpx;
+  color: #5f5e5e;
+}
+
+.guide-likes {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.guide-like-icon {
+  width: 34rpx;
+  height: 34rpx;
+}
+
+.guide-like-count {
+  font-size: 24rpx;
+  color: #5f5e5e;
+}
+
+/* 自驾路线卡片 */
+.roadtrip-card {
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.roadtrip-card:active {
+  transform: scale(0.98);
+}
+
+.roadtrip-img-wrap {
+  width: 100%;
+  height: 384rpx;
+}
+
+.roadtrip-img {
+  width: 100%;
+  height: 100%;
+}
+
+.roadtrip-img-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roadtrip-img-text {
+  font-size: 64rpx;
+}
+
+.roadtrip-body {
+  padding: 28rpx;
+}
+
+.roadtrip-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+  display: block;
+  margin-bottom: 24rpx;
+}
+
+.roadtrip-meta {
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid rgba(226, 226, 228, 0.5);
+}
+
+.roadtrip-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.roadtrip-meta-icon {
+  font-size: 28rpx;
+  color: #5f5e5e;
+}
+
+.roadtrip-meta-text {
+  font-size: 24rpx;
+  color: #5f5e5e;
+}
+
+/* 游记瀑布流 */
+.note-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx;
+}
+
+.note-card {
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.note-card:active {
+  transform: scale(0.98);
+}
+
+.note-img-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.note-img-tall {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.note-img-square {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.note-img-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-img-text {
+  font-size: 64rpx;
+}
+
+.note-loc-tag {
+  position: absolute;
+  bottom: 16rpx;
+  left: 16rpx;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8rpx);
+  border-radius: 9999rpx;
+  padding: 4rpx 16rpx;
+  gap: 4rpx;
+}
+
+.note-loc-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.note-loc-text {
+  font-size: 20rpx;
+  color: #fff;
+}
+
+.note-body {
+  padding: 24rpx;
+}
+
+.note-title {
+  font-size: 28rpx;
+  color: #1a1c1d;
+  display: block;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-author {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  min-width: 0;
+}
+
+.note-avatar {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.note-author-name {
+  font-size: 22rpx;
+  color: #5f5e5e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120rpx;
+}
+
+.note-likes {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.note-like-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.note-like-count {
+  font-size: 22rpx;
+  color: #5f5e5e;
+}
+
+/* 活动卡片 */
+.activity-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.activity-user {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.activity-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.activity-user-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+}
+
+.activity-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.activity-info {
+  background: #f3f3f5;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.activity-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.activity-info-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.activity-info-text {
+  font-size: 28rpx;
+  color: #4d4732;
+}
+
+.activity-desc {
+  font-size: 28rpx;
+  color: #4d4732;
+  line-height: 1.6;
+  display: block;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.activity-actions {
+  display: flex;
+  gap: 24rpx;
+  padding-top: 16rpx;
+  border-top: 2rpx solid rgba(226, 226, 228, 0.3);
+}
+
+.activity-btn {
+  flex: 1;
+  padding: 20rpx 0;
+  border-radius: 9999rpx;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.detail-btn {
+  border: 2rpx solid #7e775f;
+  color: #1a1c1d;
+}
+
+.join-btn {
+  background: #ffd700;
+  color: #705e00;
+}
+
+.activity-btn:active {
+  transform: scale(0.95);
+}

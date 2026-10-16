@@ -1,0 +1,144 @@
+<!-- 找搭子详情页 -->
+<view class="page">
+  <!-- 返回按钮 -->
+  <view class="back-btn" bindtap="goBack" style="top: {{statusBarHeight + 16}}px;">
+    <text class="back-icon">←</text>
+  </view>
+
+  <!-- Hero 大图 -->
+  <view class="hero">
+    <image wx:if="{{buddy.image}}" class="hero-img" src="{{buddy.image}}" mode="aspectFill"></image>
+    <view wx:else class="hero-img hero-img-placeholder">
+      <text class="hero-img-text">📷</text>
+    </view>
+    <view class="hero-gradient"></view>
+    <view class="hero-info">
+      <view class="hero-badge">{{buddy.tags}}</view>
+      <text class="hero-title">{{buddy.title}}</text>
+    </view>
+  </view>
+
+  <!-- 内容区 -->
+  <view class="content">
+    <!-- 发起人信息 -->
+    <view class="host-card">
+      <view class="host-left" bindtap="showAuthorModal">
+        <image class="host-avatar" src="{{buddy.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+        <text class="host-name">{{buddy.name}}</text>
+      </view>
+      <view wx:if="{{!isCurrentUser}}" class="host-follow {{isFollowing ? 'following' : ''}}" bindtap="onFollow">
+        <text>{{isFollowing ? '已关注' : '关注'}}</text>
+      </view>
+    </view>
+
+    <!-- Bento 信息网格 -->
+    <view class="bento-grid">
+      <view class="bento-item">
+        <view class="bento-label">
+          <image class="bento-icon" src="/static/app_tabbar/定位.png" mode="aspectFit"></image>
+          <text>目的地</text>
+        </view>
+        <text class="bento-value">{{buddy.location}}</text>
+      </view>
+      <view class="bento-item">
+        <view class="bento-label">
+          <text class="bento-icon">📅</text>
+          <text>出发时间</text>
+        </view>
+        <text class="bento-value">{{buddy.date}}</text>
+      </view>
+      <view class="bento-item">
+        <view class="bento-label">
+          <text class="bento-icon">👥</text>
+          <text>搭子人数</text>
+        </view>
+        <text class="bento-value">{{buddy.people}}</text>
+      </view>
+      <view class="bento-item">
+        <view class="bento-label">
+          <text class="bento-icon">✓</text>
+          <text>状态</text>
+        </view>
+        <text class="bento-value status">{{buddy.status}}</text>
+      </view>
+    </view>
+
+    <!-- 寻找搭子描述 -->
+    <view class="section">
+      <view class="section-title">
+        <view class="section-bar"></view>
+        <text>寻找搭子</text>
+      </view>
+      <view class="desc-content">
+        <text class="desc-text">{{buddy.desc}}</text>
+      </view>
+    </view>
+
+    <!-- 行程安排 -->
+    <view class="section">
+      <view class="section-title">
+        <view class="section-bar"></view>
+        <text>行程安排</text>
+      </view>
+      <view class="timeline">
+        <view class="timeline-line"></view>
+        <view class="timeline-item" wx:for="{{buddy.itinerary}}" wx:key="index">
+          <view class="timeline-dot"></view>
+          <view class="timeline-info">
+            <text class="timeline-day">{{item.day}}</text>
+            <text class="timeline-title">{{item.title}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="height: 160rpx;"></view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bottom-actions">
+      <view class="action-btn {{isLiked ? 'active' : ''}}" bindtap="toggleLike">
+        <image class="action-icon" src="{{isLiked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+        <text class="action-label">{{likeCount > 0 ? likeCount : '点赞'}}</text>
+      </view>
+      <view class="action-btn {{isFav ? 'active' : ''}}" bindtap="toggleFav">
+        <image class="action-icon" src="{{isFav ? '/static/app_tabbar/已收藏.png' : '/static/app_tabbar/收藏.png'}}" mode="aspectFit"></image>
+        <text class="action-label">{{collectCount > 0 ? collectCount : '收藏'}}</text>
+      </view>
+    </view>
+    <view class="join-btn {{isJoined ? 'joined' : ''}}" wx:if="{{!isCurrentUser}}" bindtap="joinActivity">
+      <text>{{isJoined ? '已加入' : '加入活动'}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 作者信息弹窗 -->
+<view wx:if="{{showAuthorModal}}" class="modal-overlay" bindtap="hideAuthorModal">
+  <view class="author-modal" catchtap="preventBubble">
+    <view class="modal-close" bindtap="hideAuthorModal">✕</view>
+    <view class="author-modal-content">
+      <image class="modal-avatar" src="{{buddy.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+      <text class="modal-nickname">{{buddy.name || '匿名用户'}}</text>
+      <text class="modal-tag">{{authorBio || '旅行爱好者'}}</text>
+      <view class="modal-stats">
+        <view class="modal-stat">
+          <text class="stat-num">{{authorFollowCount || 0}}</text>
+          <text class="stat-label">关注</text>
+        </view>
+        <view class="modal-stat">
+          <text class="stat-num">{{authorFansCount || 0}}</text>
+          <text class="stat-label">粉丝</text>
+        </view>
+      </view>
+      <view class="modal-actions">
+        <view wx:if="{{!isCurrentUser}}" class="modal-btn follow-btn {{isFollowing ? 'following' : ''}}" bindtap="handleFollow">
+          <text>{{isFollowing ? '已关注' : '关注'}}</text>
+        </view>
+        <view class="modal-btn message-btn" bindtap="goToChat">
+          <text>发私信</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

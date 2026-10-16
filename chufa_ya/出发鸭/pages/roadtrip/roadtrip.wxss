@@ -1,0 +1,202 @@
+.page {
+  min-height: 100vh;
+  background: #f9f9fb;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f9f9fb;
+  padding: 12rpx 32rpx 16rpx;
+  display: flex;
+  align-items: center;
+}
+
+.header-left, .header-right {
+  width: 80rpx;
+}
+
+.header-back {
+  font-size: 40rpx;
+  color: #705d00;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+}
+
+.page-content {
+  padding: 0 32rpx;
+}
+
+/* 搜索 */
+.search-section {
+  margin-bottom: 32rpx;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #f3f3f5;
+  border-radius: 9999rpx;
+  padding: 12rpx 8rpx 12rpx 24rpx;
+  border: 2rpx solid #d0c6ab;
+}
+
+.search-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  background: transparent;
+}
+
+.search-btn {
+  background: #ffd700;
+  color: #1a1c1d;
+  font-size: 24rpx;
+  font-weight: 700;
+  padding: 12rpx 32rpx;
+  border-radius: 9999rpx;
+}
+
+/* 区块标题 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+}
+
+/* 路线列表 */
+.route-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+.route-card {
+  background: #fff;
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+
+.route-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 440rpx;
+  overflow: hidden;
+}
+
+.route-img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+}
+
+.route-img-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.route-img-text {
+  font-size: 64rpx;
+}
+
+.route-badge {
+  position: absolute;
+  top: 24rpx;
+  left: 24rpx;
+  background: #e2dfde;
+  color: #636262;
+  font-size: 20rpx;
+  font-weight: 700;
+  padding: 8rpx 20rpx;
+  border-radius: 16rpx;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
+
+.route-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160rpx;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+.route-location {
+  position: absolute;
+  bottom: 24rpx;
+  left: 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.route-loc-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.route-loc-text {
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.route-body {
+  padding: 24rpx;
+}
+
+.route-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.route-meta {
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+}
+
+.route-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.route-meta-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.route-meta-text {
+  font-size: 24rpx;
+  color: rgba(77, 71, 50, 0.8);
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chufaya.mapper.UserFollowMapper">
+    <select id="countFollow" resultType="int">
+        SELECT COUNT(*) FROM user_follow WHERE follower_id = #{followerId} AND followee_id = #{followeeId} AND status = 1
+    </select>
+    
+    <insert id="insertFollow">
+        INSERT INTO user_follow (follower_id, followee_id, status) VALUES (#{followerId}, #{followeeId}, 1)
+    </insert>
+    
+    <delete id="deleteFollow">
+        DELETE FROM user_follow WHERE follower_id = #{followerId} AND followee_id = #{followeeId}
+    </delete>
+    
+    <update id="updateFollowStatus">
+        UPDATE user_follow SET status = #{status} WHERE follower_id = #{followerId} AND followee_id = #{followeeId}
+    </update>
+</mapper>

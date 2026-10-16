@@ -1,0 +1,159 @@
+<!-- 搜索结果页 -->
+<view class="page">
+  <!-- 顶部搜索栏 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight + 8}}px;">
+    <view class="nav-inner">
+      <view class="nav-back" bindtap="goBack">
+        <text class="back-icon">←</text>
+      </view>
+      <view class="search-box">
+        <image class="search-icon" src="/static/app_tabbar/搜索.png" mode="aspectFit"></image>
+        <input class="search-input" value="{{keyword}}" placeholder="寻找你的下一站" placeholder-style="color:#5f5e5e80;" bindinput="onSearchInput" bindconfirm="onSearchConfirm" />
+        <view class="search-clear" wx:if="{{keyword}}" bindtap="clearSearch">
+          <text>✕</text>
+        </view>
+        <view class="search-btn" bindtap="onSearchConfirm">
+          <text>搜索</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content" enhanced show-scrollbar="{{false}}">
+    <!-- 搜索历史 -->
+    <view class="history-section" wx:if="{{searchHistory.length > 0 && !keyword}}">
+      <view class="history-header">
+        <text class="history-title">搜索历史</text>
+        <text class="history-clear" bindtap="clearHistory">清空</text>
+      </view>
+      <view class="history-tags">
+        <view class="history-tag" wx:for="{{searchHistory}}" wx:key="*this" bindtap="onTapHistory" data-keyword="{{item}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view wx:if="{{loading}}" style="text-align:center;padding:100rpx 0;">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 攻略板块 -->
+    <view class="section" wx:if="{{guides.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">攻略</text>
+      </view>
+      <view class="guide-card" wx:for="{{guides}}" wx:key="id" bindtap="viewGuideDetail" data-id="{{item.id}}">
+        <view class="guide-img-wrap">
+          <image wx:if="{{item.image}}" class="guide-img" src="{{item.image}}" mode="aspectFill"></image>
+          <view wx:else class="guide-img guide-img-placeholder">
+            <text class="guide-img-text">📷</text>
+          </view>
+        </view>
+        <view class="guide-body">
+          <text class="guide-title">{{item.title}}</text>
+          <view class="guide-footer">
+            <view class="guide-author">
+              <image class="guide-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+              <text class="guide-author-name">{{item.author}}</text>
+            </view>
+            <view class="guide-likes">
+              <image class="guide-like-icon" src="{{item.liked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+              <text class="guide-like-count">{{item.likes}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 游记板块 - 瀑布流 -->
+    <view class="section" wx:if="{{notes.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">游记</text>
+      </view>
+      <view class="note-grid">
+        <view class="note-card" wx:for="{{notes}}" wx:key="id" bindtap="viewNoteDetail" data-id="{{item.id}}">
+          <view class="note-img-wrap">
+            <image wx:if="{{item.image}}" class="note-img {{index % 3 === 0 ? 'note-img-tall' : 'note-img-square'}}" src="{{item.image}}" mode="aspectFill"></image>
+            <view wx:else class="note-img note-img-placeholder">
+              <text class="note-img-text">📷</text>
+            </view>
+            <view class="note-loc-tag" wx:if="{{item.location}}">
+              <image class="note-loc-icon" src="/static/app_tabbar/定位.png" mode="aspectFit"></image>
+              <text class="note-loc-text">{{item.location}}</text>
+            </view>
+          </view>
+          <view class="note-body">
+            <text class="note-title">{{item.title}}</text>
+            <view class="note-footer">
+              <view class="note-author">
+                <image class="note-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+                <text class="note-author-name">{{item.author}}</text>
+              </view>
+              <view class="note-likes">
+                <image class="note-like-icon" src="{{item.liked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+                <text class="note-like-count">{{item.likes}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 自驾路线板块 -->
+    <view class="section" wx:if="{{roadtrips.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">自驾游</text>
+      </view>
+      <view class="roadtrip-card" wx:for="{{roadtrips}}" wx:key="id" bindtap="viewRoadtripDetail" data-id="{{item.id}}">
+        <view class="roadtrip-img-wrap">
+          <image wx:if="{{item.image}}" class="roadtrip-img" src="{{item.image}}" mode="aspectFill"></image>
+          <view wx:else class="roadtrip-img roadtrip-img-placeholder">
+            <text class="roadtrip-img-text">📷</text>
+          </view>
+        </view>
+        <view class="roadtrip-body">
+          <text class="roadtrip-title">{{item.title}}</text>
+          <view class="roadtrip-meta" wx:if="{{item.location}}">
+            <view class="roadtrip-meta-item">
+              <text class="roadtrip-meta-icon">📍</text>
+              <text class="roadtrip-meta-text">{{item.location}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 活动板块 -->
+    <view class="section" wx:if="{{activities.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">活动</text>
+      </view>
+      <view class="activity-card" wx:for="{{activities}}" wx:key="id" bindtap="viewActivityDetail" data-id="{{item.id}}">
+        <view class="activity-user">
+          <image class="activity-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+          <text class="activity-user-name">{{item.author}}</text>
+        </view>
+        <text class="activity-title">{{item.title}}</text>
+        <view class="activity-info" wx:if="{{item.location}}">
+          <view class="activity-info-item">
+            <image class="activity-info-icon" src="/static/app_tabbar/定位.png" mode="aspectFit"></image>
+            <text class="activity-info-text">{{item.location}}</text>
+          </view>
+        </view>
+        <view class="activity-actions">
+          <view class="activity-btn detail-btn">
+            <text>查看详情</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{!loading && guides.length === 0 && notes.length === 0 && roadtrips.length === 0 && activities.length === 0}}" style="text-align:center;padding:100rpx 0;">
+      <text style="color:#5f5e5e;">{{keyword ? '未找到相关内容' : '暂无内容'}}</text>
+    </view>
+
+    <view style="height: 120rpx;"></view>
+  </scroll-view>
+</view>

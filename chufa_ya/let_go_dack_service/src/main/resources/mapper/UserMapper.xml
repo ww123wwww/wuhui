@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chufaya.mapper.UserMapper">
+    <resultMap id="UserMap" type="com.example.chufaya.entity.User">
+        <id column="user_id" property="userId"/>
+        <result column="nickname" property="nickname"/>
+        <result column="duck_id" property="duckId"/>
+        <result column="phone" property="phone"/>
+        <result column="password_hash" property="passwordHash"/>
+        <result column="ip_location" property="ipLocation"/>
+        <result column="bio" property="bio"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="follow_count" property="followCount"/>
+        <result column="fans_count" property="fansCount"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="findById" resultMap="UserMap">
+        SELECT * FROM users WHERE user_id = #{userId}
+    </select>
+
+    <select id="findByPhone" resultMap="UserMap">
+        SELECT * FROM users WHERE phone = #{phone}
+    </select>
+
+    <insert id="insert" parameterType="com.example.chufaya.entity.User" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO users (nickname, duck_id, phone, password_hash, ip_location, bio, avatar_url, follow_count, fans_count, like_count, status)
+        VALUES (#{nickname}, #{duckId}, #{phone}, #{passwordHash}, #{ipLocation}, #{bio}, #{avatarUrl}, #{followCount}, #{fansCount}, #{likeCount}, #{status})
+    </insert>
+
+    <update id="updateUserInfo" parameterType="com.example.chufaya.entity.User">
+        UPDATE users
+        SET nickname = #{nickname},
+            bio = #{bio},
+            avatar_url = #{avatarUrl}
+        WHERE user_id = #{userId}
+    </update>
+
+    <update id="incrementFollowCount">
+        UPDATE users SET follow_count = follow_count + 1 WHERE user_id = #{userId}
+    </update>
+
+    <update id="decrementFollowCount">
+        UPDATE users SET follow_count = follow_count - 1 WHERE user_id = #{userId}
+    </update>
+
+    <update id="incrementFansCount">
+        UPDATE users SET fans_count = fans_count + 1 WHERE user_id = #{userId}
+    </update>
+
+    <update id="decrementFansCount">
+        UPDATE users SET fans_count = fans_count - 1 WHERE user_id = #{userId}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE users SET password_hash = #{passwordHash} WHERE user_id = #{userId}
+    </update>
+</mapper>

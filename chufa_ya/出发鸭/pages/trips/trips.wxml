@@ -1,0 +1,89 @@
+<!-- 行程页 - 即将出发 / 历史行程 -->
+<view class="page">
+  <view class="header" style="padding-top: {{statusBarHeight + 12}}px;">
+    <text class="header-title">行程</text>
+  </view>
+
+  <!-- Tab 切换 -->
+  <view class="tab-switch">
+    <view class="tab-item {{activeTab === 'upcoming' ? 'active' : ''}}" data-tab="upcoming" bindtap="switchTab">
+      <text>即将出发</text>
+    </view>
+    <view class="tab-item {{activeTab === 'history' ? 'active' : ''}}" data-tab="history" bindtap="switchTab">
+      <text>历史行程</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content" enhanced show-scrollbar="{{false}}">
+    <!-- 即将出发 -->
+    <view wx:if="{{activeTab === 'upcoming'}}">
+      <view class="trip-card" wx:for="{{upcomingTrips}}" wx:key="id" bindtap="viewTrip" data-content-id="{{item.contentId}}">
+        <view class="trip-img-wrap">
+          <image wx:if="{{item.image}}" class="trip-img" src="{{item.image}}" mode="aspectFill"></image>
+          <view wx:else class="trip-img trip-img-placeholder">
+            <text class="trip-img-text">📷</text>
+          </view>
+          <view class="trip-img-gradient"></view>
+          <view class="trip-badge">{{item.type}}</view>
+          <view class="trip-img-content">
+            <text class="trip-title">{{item.title}}</text>
+            <text class="trip-date">{{item.date}}</text>
+          </view>
+        </view>
+        <view class="trip-status">
+          <text class="trip-status-text">{{item.status}}</text>
+        </view>
+        <view class="trip-actions">
+          <view class="trip-btn trip-btn-outline" catchtap="viewDetail" data-content-id="{{item.contentId}}">
+            <text>查看详情</text>
+          </view>
+          <view class="trip-btn trip-btn-fill" catchtap="finishTrip" data-id="{{item.id}}">
+            <text>完成行程</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{upcomingTrips.length === 0}}" class="empty-state">
+        <image class="empty-icon" src="/static/Placeholder Icon/吉祥物8.png" mode="aspectFit"></image>
+        <text class="empty-text">暂无即将出发的行程</text>
+      </view>
+    </view>
+
+    <!-- 历史行程 -->
+    <view wx:if="{{activeTab === 'history'}}">
+      <view class="trip-card" wx:for="{{historyTrips}}" wx:key="id" bindtap="viewTrip" data-content-id="{{item.contentId}}">
+        <view class="trip-img-wrap">
+          <image wx:if="{{item.image}}" class="trip-img" src="{{item.image}}" mode="aspectFill"></image>
+          <view wx:else class="trip-img trip-img-placeholder">
+            <text class="trip-img-text">📷</text>
+          </view>
+          <view class="trip-img-gradient"></view>
+          <view class="trip-badge">{{item.type}}</view>
+          <view class="trip-img-content">
+            <text class="trip-title">{{item.title}}</text>
+            <text class="trip-date">{{item.date}}</text>
+          </view>
+        </view>
+        <view class="trip-status trip-status-done">
+          <text class="trip-status-text">{{item.status}}</text>
+        </view>
+        <view class="trip-actions">
+          <view class="trip-btn trip-btn-outline" catchtap="viewDetail" data-content-id="{{item.contentId}}">
+            <text>查看详情</text>
+          </view>
+          <view class="trip-btn trip-btn-fill trip-btn-done" catchtap="repost" data-id="{{item.id}}">
+            <text>再次出发</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{historyTrips.length === 0}}" class="empty-state">
+        <image class="empty-icon" src="/static/Placeholder Icon/吉祥物8.png" mode="aspectFit"></image>
+        <text class="empty-text">暂无历史行程</text>
+      </view>
+    </view>
+
+    <view style="height: 160rpx;"></view>
+  </scroll-view>
+
+
+  <tab-bar current="{{2}}"></tab-bar>
+</view>

@@ -1,0 +1,395 @@
+.page {
+  min-height: 100vh;
+  background: #f9f9fb;
+}
+
+/* 顶部搜索 */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(249, 249, 251, 0.95);
+  backdrop-filter: blur(20rpx);
+  padding: 12rpx 32rpx 16rpx;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #f3f3f5;
+  border-radius: 9999rpx;
+  padding: 12rpx 16rpx;
+  border: 2rpx solid #ffd700;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.search-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
+}
+
+.search-placeholder {
+  flex: 1;
+  font-size: 28rpx;
+  color: #5f5e5e80;
+}
+
+.search-btn {
+  background: #ffd700;
+  color: #705e00;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 8rpx 28rpx;
+  border-radius: 9999rpx;
+  white-space: nowrap;
+}
+
+.page-content {
+  height: calc(100vh - 100rpx);
+}
+
+/* Banner */
+.banner-section {
+  padding: 0 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.banner-swiper {
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.banner-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-img {
+  width: 100%;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 32rpx;
+  left: 32rpx;
+}
+
+.banner-title {
+  color: #fff;
+  font-size: 48rpx;
+  font-weight: 700;
+  display: block;
+}
+
+.banner-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24rpx;
+  display: block;
+  margin-top: 4rpx;
+}
+
+/* 金刚区 */
+.kingkong-section {
+  padding: 0 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.kingkong-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24rpx;
+}
+
+.kingkong-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kingkong-item:active {
+  transform: scale(0.95);
+}
+
+.kingkong-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.kingkong-icon-text {
+  font-size: 48rpx;
+}
+
+.kingkong-icon-img {
+  width: 160rpx;
+  height: 160rpx;
+  margin-top: -30rpx;
+}
+
+/*.kingkong-badge {
+  position: absolute;
+  top: -4rpx;
+  right: -4rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #ba1a1a;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+}*/
+
+.kingkong-label {
+  font-size: 24rpx;
+  color: #1a1c1d;
+  font-weight: 500;
+  margin-top: -30rpx;
+}
+
+/* 区块标题 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+}
+
+/* 今日推荐 */
+.recommend-scroll {
+  padding: 0 32rpx;
+  margin-bottom: 32rpx;
+  white-space: nowrap;
+}
+
+.recommend-list {
+  display: flex;
+  gap: 24rpx;
+}
+
+.recommend-card {
+  position: relative;
+  width: 560rpx;
+  height: 320rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.recommend-img {
+  width: 100%;
+  height: 100%;
+}
+
+.recommend-img-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recommend-img-text {
+  font-size: 64rpx;
+}
+
+.recommend-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+}
+
+.recommend-badge {
+  position: absolute;
+  top: 24rpx;
+  left: 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20rpx);
+  border-radius: 8rpx;
+  padding: 8rpx 16rpx;
+}
+
+.recommend-badge-date {
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 700;
+  display: block;
+}
+
+.recommend-badge-text {
+  color: #fff;
+  font-size: 24rpx;
+  display: block;
+}
+
+.recommend-info {
+  position: absolute;
+  bottom: 24rpx;
+  left: 24rpx;
+  right: 24rpx;
+}
+
+.recommend-title {
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.recommend-author {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 8rpx;
+}
+
+.recommend-avatar {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background: #ffd700;
+}
+
+.recommend-author-name {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20rpx;
+}
+
+/* 瀑布流 */
+.waterfall {
+  display: flex;
+  gap: 24rpx;
+  padding: 0 32rpx;
+}
+
+.waterfall-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.waterfall-card {
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.waterfall-card:active {
+  transform: scale(0.98);
+}
+
+.waterfall-img-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.waterfall-img {
+  width: 100%;
+  display: block;
+}
+
+.waterfall-location {
+  position: absolute;
+  bottom: 16rpx;
+  left: 16rpx;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8rpx);
+  border-radius: 9999rpx;
+  padding: 4rpx 16rpx;
+}
+
+.waterfall-loc-icon {
+  font-size: 20rpx;
+  margin-right: 4rpx;
+}
+
+.waterfall-loc-text {
+  color: #fff;
+  font-size: 20rpx;
+}
+
+.waterfall-body {
+  padding: 20rpx;
+}
+
+.waterfall-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+}
+
+.waterfall-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.waterfall-user {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.waterfall-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+
+.waterfall-avatar-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.waterfall-avatar-text {
+  font-size: 20rpx;
+}
+
+.waterfall-username {
+  font-size: 20rpx;
+  color: #5f5e5e;
+}
+
+.waterfall-likes {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.waterfall-like-icon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.waterfall-like-count {
+  font-size: 20rpx;
+  color: #5f5e5e;
+}

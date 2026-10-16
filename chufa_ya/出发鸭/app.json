@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/messages/messages",
+    "pages/post/post",
+    "pages/trips/trips",
+    "pages/profile/profile",
+    "pages/edit-profile/edit-profile",
+    "pages/find-guides/guide-detail/guide-detail",
+    "pages/travel-detail/travel-detail",
+    "pages/roadtrip/roadtrip",
+    "pages/find-buddy/find-buddy",
+    "pages/notes/notes",
+    "pages/find-guides/find-guides",
+    "pages/roadtrip/roadtrip-detail/roadtrip-detail",
+    "pages/buddy-detail/buddy-detail",
+    "pages/chat/chat",
+    "pages/search-results/search-results",
+    "pages/publish-activity/publish-activity",
+    "pages/login/login",
+    "pages/verification/verification",
+    "pages/set-password/set-password"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f9f9fb",
+    "navigationBarTitleText": "出发鸭",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f9f9fb"
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/messages/messages",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/post/post",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/trips/trips",
+        "text": "行程"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

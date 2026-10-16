@@ -1,0 +1,36 @@
+<!-- 消息页 -->
+<view class="page">
+  <view class="header" style="padding-top: {{statusBarHeight + 12}}px;">
+    <text class="header-title">消息</text>
+    <view class="header-right">
+      <text class="header-icon">⋮</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content" enhanced show-scrollbar="{{false}}">
+    <view class="chat-list">
+      <view class="chat-item" wx:for="{{chats}}" wx:key="id" bindtap="goToChat" data-chat="{{item}}">
+        <view class="chat-avatar-wrap">
+          <image class="chat-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+          <view class="chat-unread" wx:if="{{item.unread > 0}}"></view>
+        </view>
+        <view class="chat-info">
+          <view class="chat-top">
+            <text class="chat-name">{{item.name}}</text>
+            <text class="chat-time">{{item.time}}</text>
+          </view>
+          <text class="chat-preview">{{item.preview}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{chats.length === 0}}" class="empty-state">
+      <image class="empty-icon" src="/static/Placeholder Icon/吉祥物7.png" mode="aspectFit"></image>
+      <text class="empty-text">暂无消息</text>
+    </view>
+
+    <view style="height: 160rpx;"></view>
+  </scroll-view>
+
+  <tab-bar current="{{1}}"></tab-bar>
+</view>

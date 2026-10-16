@@ -1,0 +1,59 @@
+<!-- 聊天页面 -->
+<view class="chat-page">
+  <!-- 聊天内容区域 -->
+  <scroll-view
+    class="chat-content"
+    scroll-y
+    enhanced
+    show-scrollbar="{{false}}"
+    scroll-with-animation
+    scroll-top="{{scrollTop}}">
+
+    <view wx:for="{{messages}}" wx:key="id" class="message-item">
+      <!-- 自己的消息 - 显示在右侧 -->
+      <view wx:if="{{item.isSelf}}" class="self-wrapper">
+        <view class="bubble-container">
+          <view class="message-bubble self-bubble">
+            <text>{{item.content}}</text>
+          </view>
+          <view class="arrow self-arrow"></view>
+        </view>
+        <view class="avatar-wrapper">
+          <image class="avatar" src="{{currentUserAvatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+        </view>
+      </view>
+      <!-- 对方的消息 - 显示在左侧 -->
+      <view wx:else class="other-wrapper">
+        <view class="avatar-wrapper">
+          <image class="avatar" src="{{targetUserAvatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+        </view>
+        <view class="bubble-container">
+          <view class="arrow other-arrow"></view>
+          <view class="message-bubble other-bubble">
+            <text>{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view style="height: 100rpx;"></view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="chat-input-area">
+    <view class="input-wrapper">
+      <textarea
+        class="input-box"
+        placeholder="输入消息..."
+        value="{{inputValue}}"
+        bindinput="onInput"
+        bindconfirm="sendMessage"
+        auto-height
+        maxlength="500"
+        confirm-type="send"
+      />
+    </view>
+    <view class="send-btn" bindtap="sendMessage">
+      <text>发送</text>
+    </view>
+  </view>
+</view>

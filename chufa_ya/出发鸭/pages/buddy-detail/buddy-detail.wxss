@@ -1,0 +1,477 @@
+.page {
+  min-height: 100vh;
+  background: #f9f9fb;
+}
+
+/* 返回按钮 */
+.back-btn {
+  position: fixed;
+  top: 32rpx;
+  left: 32rpx;
+  z-index: 50;
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(24rpx);
+}
+
+.back-icon {
+  font-size: 40rpx;
+  color: #ffffff;
+}
+
+/* Hero 大图 */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-img-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-img-text {
+  font-size: 80rpx;
+}
+
+.hero-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+}
+
+.hero-info {
+  position: absolute;
+  bottom: 32rpx;
+  left: 32rpx;
+  right: 32rpx;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: #ffd700;
+  color: #221b00;
+  font-size: 20rpx;
+  font-weight: 700;
+  padding: 8rpx 16rpx;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.hero-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* 内容区 */
+.content {
+  position: relative;
+  margin-top: -48rpx;
+  background: #f9f9fb;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 48rpx 32rpx;
+}
+
+/* 发起人卡片 */
+.host-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 32rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  margin-bottom: 32rpx;
+}
+
+.host-left {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.host-avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 4rpx solid #ffd700;
+}
+
+.host-avatar-placeholder {
+  background: #f3f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.host-avatar-text {
+  font-size: 40rpx;
+}
+
+.host-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+}
+
+.host-follow {
+  background: #ffd700;
+  color: #221b00;
+  font-size: 24rpx;
+  font-weight: 700;
+  padding: 16rpx 40rpx;
+  border-radius: 9999rpx;
+}
+
+.host-follow.following {
+  background: #e0e0e0;
+  color: #999;
+}
+
+/* Bento 网格 */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.bento-item {
+  background: #f3f3f5;
+  padding: 32rpx;
+  border-radius: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.bento-label {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #705d00;
+}
+
+.bento-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.bento-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+}
+
+.bento-value.status {
+  color: #705d00;
+}
+
+/* 区块标题 */
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.section-bar {
+  width: 8rpx;
+  height: 40rpx;
+  background: #ffd700;
+  border-radius: 4rpx;
+}
+
+.section-title text {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1c1d;
+}
+
+/* 描述内容 */
+.desc-content {
+  background: #ffffff;
+  padding: 32rpx;
+  border-radius: 24rpx;
+}
+
+.desc-text {
+  font-size: 32rpx;
+  color: #4d4732;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* 时间线 */
+.timeline {
+  position: relative;
+  padding-left: 16rpx;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 28rpx;
+  top: 32rpx;
+  bottom: 32rpx;
+  width: 4rpx;
+  background: rgba(255, 215, 0, 0.3);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 48rpx;
+  padding-bottom: 48rpx;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -16rpx;
+  top: 8rpx;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: #ffd700;
+  border: 8rpx solid #f9f9fb;
+}
+
+.timeline-day {
+  font-size: 24rpx;
+  color: #5f5e5e;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.timeline-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1a1c1d;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160rpx;
+  background: #ffffff;
+  box-shadow: 0 -4rpx 24rpx rgba(0, 0, 0, 0.05);
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bottom-actions {
+  display: flex;
+  align-items: center;
+  gap: 48rpx;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.action-btn:active {
+  transform: scale(0.9);
+}
+
+.action-icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.action-label {
+  font-size: 20rpx;
+  color: #5f5e5e;
+}
+
+.action-btn.active .action-label {
+  color: #b02f00;
+}
+
+.join-btn {
+  flex: 1;
+  background: #ffd700;
+  color: #221b00;
+  height: 96rpx;
+  border-radius: 9999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  font-weight: 700;
+  box-shadow: 0 8rpx 24rpx rgba(112, 93, 0, 0.2);
+}
+
+.join-btn:active {
+  transform: scale(0.95);
+}
+
+.join-btn.joined {
+  background: #e0e0e0;
+  color: #999;
+  box-shadow: none;
+}
+
+/* 弹窗遮罩 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 弹窗主体 */
+.author-modal {
+  width: 600rpx;
+  background: #fff;
+  border-radius: 40rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 关闭按钮 */
+.modal-close {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 32rpx;
+  z-index: 10;
+}
+
+/* 弹窗内容 */
+.author-modal-content {
+  padding: 60rpx 40rpx;
+  text-align: center;
+}
+
+/* 头像 */
+.modal-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin-bottom: 24rpx;
+  border: 4rpx solid #f0f0f0;
+}
+
+/* 昵称 */
+.modal-nickname {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+/* 标签 */
+.modal-tag {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 32rpx;
+}
+
+/* 统计信息 */
+.modal-stats {
+  display: flex;
+  justify-content: center;
+  gap: 80rpx;
+  margin-bottom: 40rpx;
+}
+
+.modal-stat {
+  text-align: center;
+}
+
+.modal-stat .stat-num {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-stat .stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 操作按钮 */
+.modal-actions {
+  display: flex;
+  gap: 32rpx;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.modal-btn.follow-btn {
+  background: #ffd700;
+  color: #221b00;
+  font-weight: 700;
+}
+
+.modal-btn.follow-btn.following {
+  background: #e0e0e0;
+  color: #999;
+}
+
+.modal-btn.message-btn {
+  background: #f0f0f0;
+  color: #333;
+}

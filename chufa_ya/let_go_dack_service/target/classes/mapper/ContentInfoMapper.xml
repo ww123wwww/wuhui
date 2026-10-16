@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chufaya.mapper.ContentInfoMapper">
+    <resultMap id="ContentInfoMap" type="com.example.chufaya.entity.ContentInfo">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="content_type" property="contentType"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="image_list" property="imageList"/>
+        <result column="topic_ids" property="topicIds"/>
+        <result column="location" property="location"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="collect_count" property="collectCount"/>
+        <result column="status" property="status"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="findById" resultMap="ContentInfoMap">
+        SELECT * FROM content_info WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="ContentInfoMap">
+        SELECT * FROM content_info WHERE status = 1
+        ORDER BY publish_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM content_info WHERE status = 1
+    </select>
+
+    <select id="findByUserId" resultMap="ContentInfoMap">
+        SELECT * FROM content_info
+        WHERE user_id = #{userId} AND status = 1
+        ORDER BY publish_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByUserId" resultType="int">
+        SELECT COUNT(*) FROM content_info WHERE user_id = #{userId} AND status = 1
+    </select>
+
+    <select id="findByContentType" resultMap="ContentInfoMap">
+        SELECT * FROM content_info 
+        WHERE content_type = #{contentType} AND status = 1
+        ORDER BY publish_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByContentType" resultType="int">
+        SELECT COUNT(*) FROM content_info WHERE content_type = #{contentType} AND status = 1
+    </select>
+
+    <select id="findByLocation" resultMap="ContentInfoMap">
+        SELECT * FROM content_info 
+        WHERE content_type = #{contentType} AND location = #{location} AND status = 1
+        ORDER BY publish_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByLocation" resultType="int">
+        SELECT COUNT(*) FROM content_info WHERE content_type = #{contentType} AND location = #{location} AND status = 1
+    </select>
+
+    <insert id="insert" parameterType="com.example.chufaya.entity.ContentInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO content_info (user_id, content_type, title, content, cover_url, image_list, topic_ids, location, like_count, comment_count, collect_count, status, publish_time)
+        VALUES (#{userId}, #{contentType}, #{title}, #{content}, #{coverUrl}, #{imageList}, #{topicIds}, #{location}, #{likeCount}, #{commentCount}, #{collectCount}, #{status}, #{publishTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.chufaya.entity.ContentInfo">
+        UPDATE content_info
+        SET title = #{title},
+            content = #{content},
+            cover_url = #{coverUrl},
+            image_list = #{imageList},
+            topic_ids = #{topicIds},
+            location = #{location}
+        WHERE id = #{id}
+    </update>
+
+    <update id="incrementLikeCount">
+        UPDATE content_info SET like_count = like_count + 1 WHERE id = #{id}
+    </update>
+
+    <update id="decrementLikeCount">
+        UPDATE content_info SET like_count = like_count - 1 WHERE id = #{id}
+    </update>
+
+    <update id="incrementCommentCount">
+        UPDATE content_info SET comment_count = comment_count + 1 WHERE id = #{id}
+    </update>
+
+    <update id="incrementCollectCount">
+        UPDATE content_info SET collect_count = collect_count + 1 WHERE id = #{id}
+    </update>
+
+    <update id="decrementCollectCount">
+        UPDATE content_info SET collect_count = collect_count - 1 WHERE id = #{id}
+    </update>
+
+    <select id="searchByKeyword" resultMap="ContentInfoMap">
+        SELECT * FROM content_info
+        WHERE status = 1
+        <if test="keyword != null and keyword != ''">
+            AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%') OR location LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="contentType != null and contentType != ''">
+            AND content_type = #{contentType}
+        </if>
+        ORDER BY publish_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="countByKeyword" resultType="int">
+        SELECT COUNT(*) FROM content_info
+        WHERE status = 1
+        <if test="keyword != null and keyword != ''">
+            AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%') OR location LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="contentType != null and contentType != ''">
+            AND content_type = #{contentType}
+        </if>
+    </select>
+
+    <update id="updateStatus">
+        UPDATE content_info SET status = #{status}, update_time = NOW() WHERE id = #{id}
+    </update>
+</mapper>

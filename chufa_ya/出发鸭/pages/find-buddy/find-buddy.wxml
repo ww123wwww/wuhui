@@ -1,0 +1,68 @@
+<!-- 找搭子页 - _10 -->
+<view class="page">
+  <view class="header" style="padding-top: {{statusBarHeight + 12}}px;">
+    <view class="header-left" bindtap="goBack">
+      <text class="header-back">←</text>
+    </view>
+    <view class="header-search">
+      <image class="search-icon" src="/static/app_tabbar/搜索.png" mode="aspectFit"></image>
+      <input class="search-input" placeholder="搜索目的地、找搭子" placeholder-style="color:#7e775f;" value="{{searchKeyword}}" bindinput="onSearchInput" bindconfirm="onSearch" />
+      <view class="search-btn" bindtap="onSearch">
+        <text>搜索</text>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="page-content" enhanced show-scrollbar="{{false}}">
+    <view class="buddy-list">
+      <view class="buddy-card" wx:for="{{buddies}}" wx:key="id">
+        <!-- 用户信息 -->
+        <view class="buddy-header">
+          <view class="buddy-user">
+            <image class="buddy-avatar" src="{{item.avatar || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+            <text class="buddy-name">{{item.name}}</text>
+          </view>
+        </view>
+
+        <!-- 活动标题 -->
+        <text class="buddy-title">{{item.title}}</text>
+
+        <!-- 活动信息 -->
+        <view class="buddy-info">
+          <view class="buddy-info-item">
+            <image class="buddy-info-icon" src="/static/app_tabbar/定位.png" mode="aspectFit"></image>
+            <text class="buddy-info-text">{{item.location}}</text>
+          </view>
+          <view class="buddy-info-item">
+            <text class="buddy-info-icon">📅</text>
+            <text class="buddy-info-text">{{item.date}}</text>
+          </view>
+          <view class="buddy-info-item">
+            <text class="buddy-info-icon">👥</text>
+            <text class="buddy-info-text">{{item.people}}</text>
+          </view>
+        </view>
+
+        <!-- 描述 -->
+        <text class="buddy-desc">{{item.desc}}</text>
+
+        <!-- 操作按钮 -->
+        <view class="buddy-actions">
+          <view class="buddy-btn detail-btn" bindtap="viewDetail" data-id="{{item.id}}">
+            <text>查看详情</text>
+          </view>
+          <view class="buddy-btn join-btn {{item.joined ? 'joined' : ''}}" wx:if="{{!item.isOwner}}" bindtap="joinActivity" data-id="{{item.id}}" data-joined="{{item.joined}}">
+            <text>{{item.joined ? '已加入' : '加入活动'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="height: 80rpx;"></view>
+  </scroll-view>
+
+  <!-- 发布活动按钮 -->
+  <view class="publish-fab" bindtap="goPublishActivity">
+    <text class="publish-fab-icon">＋</text>
+  </view>
+</view>

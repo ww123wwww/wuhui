@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.chufaya.mapper.LikeMapper">
+    <select id="countLike" resultType="int">
+        SELECT COUNT(*) FROM likes WHERE user_id = #{userId} AND content_id = #{contentId} AND content_type = #{contentType}
+    </select>
+    
+    <insert id="insertLike">
+        INSERT INTO likes (user_id, content_id, content_type) VALUES (#{userId}, #{contentId}, #{contentType})
+    </insert>
+    
+    <delete id="deleteLike">
+        DELETE FROM likes WHERE user_id = #{userId} AND content_id = #{contentId} AND content_type = #{contentType}
+    </delete>
+    
+    <select id="findLikedContents" resultType="com.example.chufaya.entity.ContentInfo">
+        SELECT ci.* FROM content_info ci
+        INNER JOIN likes l ON ci.id = l.content_id
+        WHERE l.user_id = #{userId}
+        ORDER BY l.like_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countLikedContents" resultType="int">
+        SELECT COUNT(*) FROM likes WHERE user_id = #{userId}
+    </select>
+
+    <select id="findLikedActivities" resultType="com.example.chufaya.entity.Activity">
+        SELECT a.*, u.nickname, u.avatar_url AS avatarUrl
+        FROM activity a
+        LEFT JOIN users u ON a.user_id = u.user_id
+        INNER JOIN likes l ON a.activity_id = l.content_id AND l.content_type = 'activity'
+        WHERE l.user_id = #{userId}
+        ORDER BY l.like_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countLikedActivities" resultType="int">
+        SELECT COUNT(*) FROM likes WHERE user_id = #{userId} AND content_type = 'activity'
+    </select>
+</mapper>

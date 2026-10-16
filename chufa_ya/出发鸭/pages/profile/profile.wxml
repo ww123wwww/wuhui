@@ -1,0 +1,144 @@
+<!-- 我的页 -->
+<view class="page">
+  <scroll-view scroll-y class="page-content" enhanced show-scrollbar="{{false}}">
+    <!-- 用户信息 -->
+    <view class="profile-header" style="padding-top: {{statusBarHeight + 24}}px;">
+      <view class="profile-info">
+        <view class="profile-avatar-wrap">
+          <image class="profile-avatar" src="{{userInfo.avatarUrl || '/static/Placeholder Icon/默认头像.png'}}" mode="aspectFill"></image>
+        </view>
+        <view class="profile-detail">
+          <text class="profile-name">{{userInfo.nickname || '用户'}}</text>
+          <text class="profile-bio">{{userInfo.bio || '暂无简介'}}</text>
+        </view>
+      </view>
+      <view class="profile-stats">
+        <view class="profile-stat">
+          <text class="stat-num">{{userInfo.followCount || 0}}</text>
+          <text class="stat-label">关注</text>
+        </view>
+        <view class="profile-stat">
+          <text class="stat-num">{{userInfo.fansCount || 0}}</text>
+          <text class="stat-label">粉丝</text>
+        </view>
+      </view>
+      <view class="profile-actions">
+        <view class="action-btn edit-btn" bindtap="editProfile">
+          <image class="action-btn-icon" src="/static/app_tabbar/编辑.png" mode="aspectFit"></image>
+          <text>编辑资料</text>
+        </view>
+        <view class="action-btn logout-btn" bindtap="logout">
+          <image class="action-btn-icon" src="/static/app_tabbar/退出.png" mode="aspectFit"></image>
+          <text>退出登录</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Tab切换 -->
+    <view class="tabs">
+      <view 
+        wx:for="{{tabs}}" 
+        wx:key="id" 
+        class="tab {{currentTab === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="switchTab"
+      >
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{currentTab === 'events' ? joinedActivities.length === 0 : (leftPosts.length === 0 && rightPosts.length === 0)}}" class="empty-state">
+      <image class="empty-icon" src="/static/Placeholder Icon/{{currentTab === 'publish' ? '吉祥物2' : currentTab === 'liked' ? '吉祥物3' : currentTab === 'favorites' ? '吉祥物4' : '吉祥物5'}}.png" mode="aspectFit"></image>
+      <text class="empty-text">{{currentTab === 'publish' ? '暂无发布内容' : currentTab === 'liked' ? '暂无赞过内容' : currentTab === 'favorites' ? '暂无收藏内容' : '暂无活动'}}</text>
+    </view>
+
+    <!-- 我的活动列表 -->
+    <view class="activity-list" wx:elif="{{currentTab === 'events'}}">
+      <view class="activity-card" wx:for="{{joinedActivities}}" wx:key="id" bindtap="viewActivity" data-id="{{item.id}}">
+        <image wx:if="{{item.coverImg}}" class="activity-cover" src="{{item.coverImg}}" mode="aspectFill"></image>
+        <view wx:else class="activity-cover activity-cover-placeholder">
+          <text class="activity-cover-text">📷</text>
+        </view>
+        <view class="activity-info">
+          <text class="activity-title">{{item.title}}</text>
+          <view class="activity-meta">
+            <view class="activity-meta-item">
+              <text class="meta-icon">📍</text>
+              <text class="meta-text">{{item.address}}</text>
+            </view>
+            <view class="activity-meta-item">
+              <text class="meta-icon">📅</text>
+              <text class="meta-text">{{item.date}}</text>
+            </view>
+            <view class="activity-meta-item">
+              <text class="meta-icon">👥</text>
+              <text class="meta-text">{{item.people}}</text>
+            </view>
+          </view>
+          <view class="activity-status {{item.status === 1 ? 'full' : ''}}">
+            <text>{{item.statusText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 瀑布流内容 -->
+    <view class="waterfall" wx:else>
+      <view class="waterfall-col">
+        <block wx:for="{{leftPosts}}" wx:key="id">
+          <view class="waterfall-card" bindtap="viewPost" data-id="{{item.id}}" data-type="{{item.contentType}}">
+            <view class="waterfall-img-wrap">
+              <image wx:if="{{item.image}}" class="waterfall-img" src="{{item.image}}" mode="widthFix" style="height: {{item.imgHeight}}rpx;"></image>
+              <view wx:if="{{currentTab === 'publish'}}" class="more-btn" catchtap="togglePostMenu" data-id="{{item.id}}">
+                <text class="more-icon">⋯</text>
+                <view wx:if="{{activeMenuPostId === item.id}}" class="more-dropdown" catchtap="onDeletePost" data-id="{{item.id}}">
+                  <text class="dropdown-icon">🗑</text>
+                  <text class="dropdown-text">删除</text>
+                </view>
+              </view>
+            </view>
+            <view class="waterfall-body">
+              <text class="waterfall-title">{{item.title}}</text>
+              <view class="waterfall-footer">
+                <view class="waterfall-likes">
+                  <image class="waterfall-like-icon {{item.liked ? 'liked' : ''}}" src="{{item.liked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+                  <text class="waterfall-like-count">{{item.likes}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="waterfall-col">
+        <block wx:for="{{rightPosts}}" wx:key="id">
+          <view class="waterfall-card" bindtap="viewPost" data-id="{{item.id}}" data-type="{{item.contentType}}">
+            <view class="waterfall-img-wrap">
+              <image wx:if="{{item.image}}" class="waterfall-img" src="{{item.image}}" mode="widthFix" style="height: {{item.imgHeight}}rpx;"></image>
+              <view wx:if="{{currentTab === 'publish'}}" class="more-btn" catchtap="togglePostMenu" data-id="{{item.id}}">
+                <text class="more-icon">⋯</text>
+                <view wx:if="{{activeMenuPostId === item.id}}" class="more-dropdown" catchtap="onDeletePost" data-id="{{item.id}}">
+                  <text class="dropdown-icon">🗑</text>
+                  <text class="dropdown-text">删除</text>
+                </view>
+              </view>
+            </view>
+            <view class="waterfall-body">
+              <text class="waterfall-title">{{item.title}}</text>
+              <view class="waterfall-footer">
+                <view class="waterfall-likes">
+                  <image class="waterfall-like-icon {{item.liked ? 'liked' : ''}}" src="{{item.liked ? '/static/app_tabbar/已点赞.png' : '/static/app_tabbar/点赞.png'}}" mode="aspectFit"></image>
+                  <text class="waterfall-like-count">{{item.likes}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view style="height: 160rpx;"></view>
+  </scroll-view>
+
+  <tab-bar current="{{3}}"></tab-bar>
+</view>

@@ -1,0 +1,40 @@
+<!-- 自定义底部导航栏 -->
+<view class="tab-bar">
+  <view class="tab-bar-inner">
+    <!-- 首页 -->
+    <view class="tab-item {{!hideSelected && current === 0 ? 'active' : ''}}" data-index="0" bindtap="switchTab">
+      <view class="tab-icon">
+        <image class="tab-icon-img" src="/static/app_tabbar/home.png" mode="aspectFit"></image>
+      </view>
+      <text class="tab-label">{{tabs[0].label}}</text>
+    </view>
+    <!-- 消息 -->
+    <view class="tab-item {{!hideSelected && current === 1 ? 'active' : ''}}" data-index="1" bindtap="switchTab">
+      <view class="tab-icon">
+        <image class="tab-icon-img" src="/static/app_tabbar/circle.png" mode="aspectFit"></image>
+      </view>
+      <text class="tab-label">{{tabs[1].label}}</text>
+    </view>
+    <!-- 中间发布按钮 -->
+    <view class="tab-item fab-item" bindtap="onFabTap">
+      <view class="fab-btn">
+        <image class="fab-icon-img" src="/static/app_tabbar/publish.png" mode="aspectFit"></image>
+      </view>
+      <text class="fab-label">发布</text>
+    </view>
+    <!-- 行程 -->
+    <view class="tab-item {{!hideSelected && current === 2 ? 'active' : ''}}" data-index="2" bindtap="switchTab">
+      <view class="tab-icon">
+        <image class="tab-icon-img" src="/static/app_tabbar/trip.png" mode="aspectFit"></image>
+      </view>
+      <text class="tab-label">{{tabs[2].label}}</text>
+    </view>
+    <!-- 我的 -->
+    <view class="tab-item {{!hideSelected && current === 3 ? 'active' : ''}}" data-index="3" bindtap="switchTab">
+      <view class="tab-icon">
+        <image class="tab-icon-img" src="/static/app_tabbar/profile.png" mode="aspectFit"></image>
+      </view>
+      <text class="tab-label">{{tabs[3].label}}</text>
+    </view>
+  </view>
+</view>

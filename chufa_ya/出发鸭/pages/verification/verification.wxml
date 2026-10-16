@@ -1,0 +1,90 @@
+<!-- 验证码登录页 -->
+<view class="login-container">
+  <image class="login-bg" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" mode="aspectFill"></image>
+
+  <view class="login-header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <view class="help-btn">
+      <text>帮助</text>
+    </view>
+  </view>
+
+  <view class="login-content">
+    <view class="login-title">
+      <text>验证码登录</text>
+    </view>
+    <view class="login-subtitle">
+      <text>输入手机号码获取验证码登录</text>
+    </view>
+
+    <view class="form-group">
+      <input
+        type="number"
+        value="{{phone}}"
+        maxlength="11"
+        placeholder="请输入手机号码"
+        placeholder-style="color: rgba(255, 255, 255, 0.6)"
+        class="input-field"
+        bindinput="onPhoneInput"
+        bindconfirm="getVerificationCode"
+      />
+    </view>
+
+    <view class="form-group">
+      <view class="verification-code-container">
+        <input
+          type="number"
+          value="{{code}}"
+          placeholder="请输入验证码"
+          placeholder-style="color: rgba(255, 255, 255, 0.6)"
+          class="input-field verification-code-input"
+          bindinput="onCodeInput"
+          bindconfirm="loginWithCode"
+        />
+        <view class="get-code-btn {{isCounting ? 'disabled' : ''}}" bindtap="getVerificationCode">
+          <text>{{isCounting ? countdownText : '获取验证码'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="login-btn" bindtap="loginWithCode">
+      <text>登录</text>
+    </view>
+
+    <view class="login-options">
+      <text class="option-item" bindtap="switchToPasswordLogin">密码登录</text>
+      <text class="option-item">忘记密码</text>
+    </view>
+
+    <!-- 第三方登录 -->
+    <view class="third-party-login">
+      <view class="third-party-title">
+        <text>其他登录方式（第三方账号注册需要绑定手机号）</text>
+      </view>
+      <view class="third-party-icons">
+        <view class="icon-item">
+          <image src="/static/app_tabbar/微信.svg" class="icon-image" mode="aspectFit"></image>
+        </view>
+        <view class="icon-item">
+          <image src="/static/app_tabbar/QQ.svg" class="icon-image" mode="aspectFit"></image>
+        </view>
+        <view class="icon-item">
+          <image src="/static/app_tabbar/微博.svg" class="icon-image" mode="aspectFit"></image>
+        </view>
+      </view>
+    </view>
+
+    <view class="agreement">
+      <checkbox-group bindchange="onAgreementChange">
+        <label class="agreement-label">
+          <checkbox value="agree" checked="{{isAgreed}}" />
+          <text class="agreement-text">
+            已阅读并同意<text class="agreement-link">《出发鸭服务协议》</text>、<text class="agreement-link">《出发鸭商城平台服务协议》</text>、<text class="agreement-link">《隐私政策》</text>以及<text class="agreement-link">《天翼账号服务与隐私协议》</text>
+          </text>
+        </label>
+      </checkbox-group>
+    </view>
+  </view>
+</view>
